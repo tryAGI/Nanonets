@@ -1,6 +1,9 @@
 # Microsoft.Extensions.AI Integration
 
-The Nanonets SDK provides `AIFunction` tools that integrate with any `IChatClient` via [Microsoft.Extensions.AI](https://www.nuget.org/packages/Microsoft.Extensions.AI).
+!!! tip "Cross-SDK comparison"
+    See the [centralized MEAI documentation](https://tryagi.github.io/docs/meai/) for feature matrices and comparisons across all tryAGI SDKs.
+
+The Nanonets SDK provides `AIFunction` tool wrappers compatible with [Microsoft.Extensions.AI](https://learn.microsoft.com/en-us/dotnet/ai/microsoft-extensions-ai). These tools can be used with any `IChatClient` to give AI models access to Nanonets' OCR, image classification, and document extraction capabilities.
 
 ## Available Tools
 
