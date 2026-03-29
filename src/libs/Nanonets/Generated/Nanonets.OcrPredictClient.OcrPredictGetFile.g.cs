@@ -58,8 +58,8 @@ namespace Nanonets
                 path: $"/Inferences/Model/{modelId}/ImageLevelInferences",
                 baseUri: HttpClient.BaseAddress); 
             __pathBuilder
-                .AddRequiredParameter("start_day_interval", startDayInterval.ToString())
-                .AddRequiredParameter("current_batch_day", currentBatchDay.ToString()) 
+                .AddRequiredParameter("start_day_interval", startDayInterval.ToString()!)
+                .AddRequiredParameter("current_batch_day", currentBatchDay.ToString()!) 
                 ; 
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
