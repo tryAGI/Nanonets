@@ -61,7 +61,9 @@ namespace Nanonets
 
 
         /// <summary>
-        /// IC Model Details
+        /// IC Model Details. Get the details of an existing Image Classification (IC) model.<br/>
+        /// &lt;br /&gt;<br/>
+        /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
         public IcModelDetailsClient IcModelDetails => new IcModelDetailsClient(HttpClient, authorizations: Authorizations)
         {
@@ -70,7 +72,9 @@ namespace Nanonets
         };
 
         /// <summary>
-        /// IC Predict
+        /// IC Predict. Upload a file to an existing Image Classification (IC) model and get the predicted classification result.<br/>
+        /// &lt;br /&gt;<br/>
+        /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
         public IcPredictClient IcPredict => new IcPredictClient(HttpClient, authorizations: Authorizations)
         {
@@ -79,7 +83,9 @@ namespace Nanonets
         };
 
         /// <summary>
-        /// IC Train
+        /// IC Train. Train an existing Image Classification (IC) model.<br/>
+        /// &lt;br /&gt;<br/>
+        /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
         public IcTrainClient IcTrain => new IcTrainClient(HttpClient, authorizations: Authorizations)
         {
@@ -88,7 +94,12 @@ namespace Nanonets
         };
 
         /// <summary>
-        /// IC Upload
+        /// IC Upload. Upload training images to an existing Image Classification (IC) model.<br/>
+        /// &lt;br /&gt;<br/>
+        /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.)<br/>
+        /// &lt;br /&gt;<br/>
+        /// &lt;br /&gt;<br/>
+        /// **NOTE**: These end points are only for uploading **training files** for the model and the same files cannot be directly used for prediction. (They need to be uploaded again through the [prediction end points](#tag/icPredict) for prediction.).
         /// </summary>
         public IcUploadClient IcUpload => new IcUploadClient(HttpClient, authorizations: Authorizations)
         {
@@ -97,7 +108,9 @@ namespace Nanonets
         };
 
         /// <summary>
-        /// OCR Model Details
+        /// OCR Model Details. Get the details of an existing Optical Character Recognition (OCR) model.<br/>
+        /// &lt;br /&gt;<br/>
+        /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
         public OcrModelDetailsClient OcrModelDetails => new OcrModelDetailsClient(HttpClient, authorizations: Authorizations)
         {
@@ -106,7 +119,9 @@ namespace Nanonets
         };
 
         /// <summary>
-        /// OCR Predict
+        /// OCR Predict. Upload a file to an existing Optical Character Recognition (OCR) model and get the extracted data.<br/>
+        /// &lt;br /&gt;<br/>
+        /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
         public OcrPredictClient OcrPredict => new OcrPredictClient(HttpClient, authorizations: Authorizations)
         {
@@ -115,7 +130,9 @@ namespace Nanonets
         };
 
         /// <summary>
-        /// OCR Train
+        /// OCR Train. Train an existing Optical Character Recognition (OCR) model.<br/>
+        /// &lt;br /&gt;<br/>
+        /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
         public OcrTrainClient OcrTrain => new OcrTrainClient(HttpClient, authorizations: Authorizations)
         {
@@ -124,7 +141,12 @@ namespace Nanonets
         };
 
         /// <summary>
-        /// OCR Upload
+        /// OCR Upload. Upload training images to an existing Optical Character Recognition (OCR) model.<br/>
+        /// &lt;br /&gt;<br/>
+        /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.)<br/>
+        /// &lt;br /&gt;<br/>
+        /// &lt;br /&gt;<br/>
+        /// **NOTE**: These end points are only for uploading **training files** for the model and the same files cannot be directly used for prediction. (They need to be uploaded again through the [prediction end points](#tag/ocrPredict) for prediction.).
         /// </summary>
         public OcrUploadClient OcrUpload => new OcrUploadClient(HttpClient, authorizations: Authorizations)
         {

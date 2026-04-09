@@ -6,6 +6,7 @@ namespace Nanonets
     public sealed partial class NanonetsClient
     {
         /// <inheritdoc cref="NanonetsClient(global::System.Net.Http.HttpClient?, global::System.Uri?, global::System.Collections.Generic.List{global::Nanonets.EndPointAuthorization}?, bool)"/>
+
         public NanonetsClient(
             string username,
             string password,

@@ -10,6 +10,7 @@ namespace Nanonets
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
+
         public void AuthorizeUsingBasic(
             string username,
             string password);

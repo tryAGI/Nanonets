@@ -4,7 +4,9 @@
 namespace Nanonets
 {
     /// <summary>
-    /// IC Model Details<br/>
+    /// IC Model Details. Get the details of an existing Image Classification (IC) model.<br/>
+    /// &lt;br /&gt;<br/>
+    /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
