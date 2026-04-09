@@ -5,6 +5,25 @@ namespace Nanonets
 {
     public partial class IcUploadClient
     {
+
+
+        private static readonly global::Nanonets.EndPointSecurityRequirement s_IcUploadFileSecurityRequirement0 =
+            new global::Nanonets.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Nanonets.EndPointAuthorizationRequirement[]
+                {                    new global::Nanonets.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Basic",
+                        FriendlyName = "Basic",
+                    },
+                },
+            };
+        private static readonly global::Nanonets.EndPointSecurityRequirement[] s_IcUploadFileSecurityRequirements =
+            new global::Nanonets.EndPointSecurityRequirement[]
+            {                s_IcUploadFileSecurityRequirement0,
+            };
         partial void PrepareIcUploadFileArguments(
             global::System.Net.Http.HttpClient httpClient,
             global::Nanonets.IcUploadFileRequest request);
@@ -54,9 +73,15 @@ namespace Nanonets
                 httpClient: HttpClient,
                 request: request);
 
+
+            var __authorizations = global::Nanonets.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_IcUploadFileSecurityRequirements,
+                operationName: "IcUploadFileAsync");
+
             var __pathBuilder = new global::Nanonets.PathBuilder(
                 path: "/ImageCategorization/UploadFile",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Post,
@@ -66,7 +91,7 @@ namespace Nanonets
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

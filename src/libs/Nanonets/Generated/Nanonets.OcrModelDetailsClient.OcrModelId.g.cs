@@ -5,6 +5,25 @@ namespace Nanonets
 {
     public partial class OcrModelDetailsClient
     {
+
+
+        private static readonly global::Nanonets.EndPointSecurityRequirement s_OcrModelIdSecurityRequirement0 =
+            new global::Nanonets.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Nanonets.EndPointAuthorizationRequirement[]
+                {                    new global::Nanonets.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Basic",
+                        FriendlyName = "Basic",
+                    },
+                },
+            };
+        private static readonly global::Nanonets.EndPointSecurityRequirement[] s_OcrModelIdSecurityRequirements =
+            new global::Nanonets.EndPointSecurityRequirement[]
+            {                s_OcrModelIdSecurityRequirement0,
+            };
         partial void PrepareOcrModelIdArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string modelId);
@@ -44,9 +63,15 @@ namespace Nanonets
                 httpClient: HttpClient,
                 modelId: ref modelId);
 
+
+            var __authorizations = global::Nanonets.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_OcrModelIdSecurityRequirements,
+                operationName: "OcrModelIdAsync");
+
             var __pathBuilder = new global::Nanonets.PathBuilder(
                 path: $"/OCR/Model/{modelId}",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -56,7 +81,7 @@ namespace Nanonets
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

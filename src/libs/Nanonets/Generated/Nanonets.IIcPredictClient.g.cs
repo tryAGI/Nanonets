@@ -4,7 +4,9 @@
 namespace Nanonets
 {
     /// <summary>
-    /// IC Predict<br/>
+    /// IC Predict. Upload a file to an existing Image Classification (IC) model and get the predicted classification result.<br/>
+    /// &lt;br /&gt;<br/>
+    /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
