@@ -54,6 +54,9 @@ namespace Nanonets
 #if DEBUG
             = true;
 #endif
+
+        /// <inheritdoc/>
+        public global::Nanonets.AutoSDKClientOptions Options { get; }
         /// <summary>
         /// 
         /// </summary>
@@ -65,7 +68,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
-        public IcModelDetailsClient IcModelDetails => new IcModelDetailsClient(HttpClient, authorizations: Authorizations)
+        public IcModelDetailsClient IcModelDetails => new IcModelDetailsClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -76,7 +79,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
-        public IcPredictClient IcPredict => new IcPredictClient(HttpClient, authorizations: Authorizations)
+        public IcPredictClient IcPredict => new IcPredictClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -87,7 +90,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
-        public IcTrainClient IcTrain => new IcTrainClient(HttpClient, authorizations: Authorizations)
+        public IcTrainClient IcTrain => new IcTrainClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -101,7 +104,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// **NOTE**: These end points are only for uploading **training files** for the model and the same files cannot be directly used for prediction. (They need to be uploaded again through the [prediction end points](#tag/icPredict) for prediction.).
         /// </summary>
-        public IcUploadClient IcUpload => new IcUploadClient(HttpClient, authorizations: Authorizations)
+        public IcUploadClient IcUpload => new IcUploadClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -112,7 +115,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
-        public OcrModelDetailsClient OcrModelDetails => new OcrModelDetailsClient(HttpClient, authorizations: Authorizations)
+        public OcrModelDetailsClient OcrModelDetails => new OcrModelDetailsClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -123,7 +126,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
-        public OcrPredictClient OcrPredict => new OcrPredictClient(HttpClient, authorizations: Authorizations)
+        public OcrPredictClient OcrPredict => new OcrPredictClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -134,7 +137,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).
         /// </summary>
-        public OcrTrainClient OcrTrain => new OcrTrainClient(HttpClient, authorizations: Authorizations)
+        public OcrTrainClient OcrTrain => new OcrTrainClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -148,7 +151,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// **NOTE**: These end points are only for uploading **training files** for the model and the same files cannot be directly used for prediction. (They need to be uploaded again through the [prediction end points](#tag/ocrPredict) for prediction.).
         /// </summary>
-        public OcrUploadClient OcrUpload => new OcrUploadClient(HttpClient, authorizations: Authorizations)
+        public OcrUploadClient OcrUpload => new OcrUploadClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -167,11 +170,37 @@ namespace Nanonets
             global::System.Net.Http.HttpClient? httpClient = null,
             global::System.Uri? baseUri = null,
             global::System.Collections.Generic.List<global::Nanonets.EndPointAuthorization>? authorizations = null,
+            bool disposeHttpClient = true) : this(
+                httpClient,
+                baseUri,
+                authorizations,
+                options: null,
+                disposeHttpClient: disposeHttpClient)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new instance of the NanonetsClient.
+        /// If no httpClient is provided, a new one will be created.
+        /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
+        /// </summary>
+        /// <param name="httpClient">The HttpClient instance. If not provided, a new one will be created.</param>
+        /// <param name="baseUri">The base URL for the API. If not provided, the default baseUri from OpenAPI spec will be used.</param>
+        /// <param name="authorizations">The authorizations to use for the requests.</param>
+        /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
+        /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
+        public NanonetsClient(
+            global::System.Net.Http.HttpClient? httpClient = null,
+            global::System.Uri? baseUri = null,
+            global::System.Collections.Generic.List<global::Nanonets.EndPointAuthorization>? authorizations = null,
+            global::Nanonets.AutoSDKClientOptions? options = null,
             bool disposeHttpClient = true)
         {
+
             HttpClient = httpClient ?? new global::System.Net.Http.HttpClient();
             HttpClient.BaseAddress ??= baseUri ?? new global::System.Uri(DefaultBaseUrl);
             Authorizations = authorizations ?? new global::System.Collections.Generic.List<global::Nanonets.EndPointAuthorization>();
+            Options = options ?? new global::Nanonets.AutoSDKClientOptions();
             _disposeHttpClient = disposeHttpClient;
 
             Initialized(HttpClient);

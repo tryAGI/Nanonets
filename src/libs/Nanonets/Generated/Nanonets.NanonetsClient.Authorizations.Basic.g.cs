@@ -27,6 +27,7 @@ namespace Nanonets
             Authorizations.Add(new global::Nanonets.EndPointAuthorization
             {
                 Type = "Http",
+                SchemeId = "BasicAuth",
                 Location = "Header",
                 Name = "Basic",
                 Value = global::System.Convert.ToBase64String(

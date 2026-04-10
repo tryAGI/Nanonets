@@ -11,6 +11,7 @@ namespace Nanonets
         /// On successful upload, model information along with the total number of images per category will be received.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Nanonets.ApiException"></exception>
         /// <remarks>
@@ -26,6 +27,7 @@ namespace Nanonets
         global::System.Threading.Tasks.Task<string> IcUploadUrlAsync(
 
             global::Nanonets.IcUploadUrlRequest request,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Upload Training Images by URLs<br/>
@@ -47,12 +49,14 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// **Format**: PNG, JPEG and/or PDF
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<string> IcUploadUrlAsync(
             string modelId,
             string category,
             string urls,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
