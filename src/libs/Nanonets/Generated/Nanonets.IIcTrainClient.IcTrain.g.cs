@@ -10,6 +10,7 @@ namespace Nanonets
         /// The same end point is to be used to re-train a model after uploading more files to improve the model.
         /// </summary>
         /// <param name="modelId"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Nanonets.ApiException"></exception>
         /// <remarks>
@@ -20,6 +21,7 @@ namespace Nanonets
         /// </remarks>
         global::System.Threading.Tasks.Task<string> IcTrainAsync(
             string modelId,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

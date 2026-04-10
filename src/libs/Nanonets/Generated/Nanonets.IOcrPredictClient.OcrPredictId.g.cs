@@ -10,6 +10,7 @@ namespace Nanonets
         /// </summary>
         /// <param name="modelId"></param>
         /// <param name="id"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Nanonets.ApiException"></exception>
         /// <remarks>
@@ -21,6 +22,7 @@ namespace Nanonets
         global::System.Threading.Tasks.Task<string> OcrPredictIdAsync(
             string modelId,
             string id,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

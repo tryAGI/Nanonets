@@ -12,6 +12,7 @@ namespace Nanonets
         /// **NOTE**: Batch file uploads are not supported by this end point.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Nanonets.ApiException"></exception>
         /// <remarks>
@@ -27,6 +28,7 @@ namespace Nanonets
         global::System.Threading.Tasks.Task<string> IcUploadFileAsync(
 
             global::Nanonets.IcUploadFileRequest request,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Upload Training Images by File<br/>
@@ -54,6 +56,7 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// **Format**: PNG, JPEG or PDF
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<string> IcUploadFileAsync(
@@ -61,6 +64,7 @@ namespace Nanonets
             string category,
             byte[] file,
             string filename,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

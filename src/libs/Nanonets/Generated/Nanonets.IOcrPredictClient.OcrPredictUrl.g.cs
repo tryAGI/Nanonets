@@ -11,6 +11,7 @@ namespace Nanonets
         /// </summary>
         /// <param name="modelId"></param>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Nanonets.ApiException"></exception>
         /// <remarks>
@@ -25,6 +26,7 @@ namespace Nanonets
             string modelId,
 
             global::Nanonets.OcrPredictUrlRequest request,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Prediction for Image URLs<br/>
@@ -37,11 +39,13 @@ namespace Nanonets
         /// &lt;br /&gt;<br/>
         /// **Format**: PNG, JPEG and/or PDF
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<string> OcrPredictUrlAsync(
             string modelId,
             string urls,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
