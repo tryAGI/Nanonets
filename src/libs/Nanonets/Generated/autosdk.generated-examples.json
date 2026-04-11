@@ -1,0 +1,191 @@
+{
+  "Examples": [
+    {
+      "Order": 1,
+      "Title": "Get All Model Details",
+      "Slug": "ic-model-all",
+      "Description": "Get information of all models in an account, irrespective of the type of model (OCR model or Image Classification model).",
+      "Language": "csharp",
+      "Code": "using var client = new NanonetsClient(username, password);\nvar response = await client.IcModelDetails.IcModelAllAsync();\n\n// Example response:\n// {\n//   \u0022model_id\u0022: \u002200000000-0000-0000-0000-000000000000\u0022,\n//   \u0022model_type\u0022: \u0022ocr\u0022,\n//   \u0022state\u0022: 0,\n//   \u0022categories\u0022: [\n//     {\n//       \u0022name\u0022: \u0022category1\u0022,\n//       \u0022count\u0022: 0\n//     },\n//     {\n//       \u0022name\u0022: \u0022category2\u0022,\n//       \u0022count\u0022: 0\n//     }\n//   ]\n// }",
+      "Format": "sdk",
+      "OperationId": "ic/model/all",
+      "Setup": "This example assumes \u0060using Nanonets;\u0060 is in scope and \u0060username\u0060 / \u0060password\u0060 contain the required credentials."
+    },
+    {
+      "Order": 2,
+      "Title": "Get Model Details by ID",
+      "Slug": "ic-model-id",
+      "Description": "Retrieve a specific model\u0027s details given its ID.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/ImageCategorization/Model/?id=REPLACE_MODEL_ID\u0022);\nvar request = new RestRequest(Method.GET);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ic/model/id",
+      "Setup": null
+    },
+    {
+      "Order": 3,
+      "Title": "Prediction for Image File",
+      "Slug": "ic-predict-file",
+      "Description": "Given an image file, extract data as per the label(s) specified in the model.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/ImageCategorization/LabelFile/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022Authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nrequest.AddHeader(\u0022Accept\u0022, \u0022multipart/form-data\u0022);\nrequest.AddParameter(\u0022modelId\u0022, \u0022REPLACE_MODEL_ID\u0022);\nrequest.AddFile(\u0022file\u0022, \u0022REPLACE_IMAGE_PATH.jpg\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ic/predict/file",
+      "Setup": null
+    },
+    {
+      "Order": 4,
+      "Title": "Prediction for Image URLs",
+      "Slug": "ic-predict-url",
+      "Description": "Given image URL(s), extract data as per the label(s) specified in the model.\nMultiple image URLs per request are allowed.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/ImageCategorization/LabelUrls/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nrequest.AddHeader(\u0022accept\u0022, \u0022application/x-www-form-urlencoded\u0022);\nrequest.AddParameter(\u0022modelId\u0022, \u0022REPLACE_MODEL_ID\u0022);\nrequest.AddParameter(\u0022urls\u0022, \u0022https://nanonets.s3-us-west-2.amazonaws.com/test-images/test1.jpg\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ic/predict/url",
+      "Setup": null
+    },
+    {
+      "Order": 5,
+      "Title": "Train Model",
+      "Slug": "ic-train",
+      "Description": "Train a model after uploading files to the model.\nThe same end point is to be used to re-train a model after uploading more files to improve the model.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/ImageCategorization/Train/?modelId=REPLACE_MODEL_ID\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ic/train",
+      "Setup": null
+    },
+    {
+      "Order": 6,
+      "Title": "Upload Training Images by File",
+      "Slug": "ic-upload-file",
+      "Description": "Upload a training image to the specified model using a locally stored file.\nOn successful upload, model information along with the total number of images per category will be received.\n\u003Cbr /\u003E\n**NOTE**: Batch file uploads are not supported by this end point.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/ImageCategorization/UploadFile/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022Authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nrequest.AddHeader(\u0022Accept\u0022, \u0022multipart/form-data\u0022);\nrequest.AddParameter(\u0022modelId\u0022, \u0022REPLACE_MODEL_ID\u0022);\nrequest.AddParameter(\u0022category\u0022, \u0022category1\u0022);\nrequest.AddFile(\u0022file\u0022, \u0022REPLACE_IMAGE_PATH.jpg\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ic/upload/file",
+      "Setup": null
+    },
+    {
+      "Order": 7,
+      "Title": "Upload Training Images by URLs",
+      "Slug": "ic-upload-url",
+      "Description": "Upload training images to a model using image URLs.\nMultiple images can be uploaded in the same request by adding more URLs in the \u0060urls\u0060 array.\nOn successful upload, model information along with the total number of images per category will be received.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/ImageCategorization/UploadUrls/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nrequest.AddHeader(\u0022accept\u0022, \u0022application/x-www-form-urlencoded\u0022);\nrequest.AddParameter(\u0022modelId\u0022, \u0022REPLACE_MODEL_ID\u0022);\nrequest.AddParameter(\u0022category\u0022, \u0022category1\u0022);\nrequest.AddParameter(\u0022urls\u0022, \u0022https://nanonets.s3-us-west-2.amazonaws.com/test-images/test1.jpg\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ic/upload/url",
+      "Setup": null
+    },
+    {
+      "Order": 8,
+      "Title": "Get Model Details by ID",
+      "Slug": "ocr-model-id",
+      "Description": "Retrieve a specific model\u0027s details given its ID.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/OCR/Model/\u0022 \u002B {{model_id}});\nvar request = new RestRequest(Method.GET);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/model/id",
+      "Setup": null
+    },
+    {
+      "Order": 9,
+      "Title": "Prediction for Image File",
+      "Slug": "ocr-predict-file",
+      "Description": "Given an image file, extract data as per the label(s) specified in the model.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/OCR/Model/{{model_id}}/LabelFile/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022Authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nrequest.AddHeader(\u0022Accept\u0022, \u0022multipart/form-data\u0022);\nrequest.AddFile(\u0022file\u0022, \u0022REPLACE_IMAGE_PATH.jpg\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/predict/file",
+      "Setup": null
+    },
+    {
+      "Order": 10,
+      "Title": "Async Prediction for Image File",
+      "Slug": "ocr-predict-file-async",
+      "Description": "Given an image file, extract data as per the label(s) specified in the model, \u003Cu\u003Easynchronously\u003C/u\u003E.\nThis end point will send back a response as soon as the file has been uploaded, with a file ID. To retrieve the extracted data from the uploaded file, please use this file ID and hit the [Get Prediction File by ID](#operation/ocr/predict/id) end point.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/OCR/Model/{{model_id}}/LabelFile/?async=true\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022Authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nrequest.AddHeader(\u0022Accept\u0022, \u0022multipart/form-data\u0022);\nrequest.AddFile(\u0022file\u0022, \u0022REPLACE_IMAGE_PATH.jpg\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/predict/file/async",
+      "Setup": null
+    },
+    {
+      "Order": 11,
+      "Title": "Get All Prediction Files",
+      "Slug": "ocr-predict-getfile",
+      "Description": "Retrieve the files that have been processed by the prediction end points.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/Inferences/Model/{{model_id}}/ImageLevelInferences?start_day_interval={start_day}\u0026current_batch_day={end_day}\u0022);\nvar request = new RestRequest(Method.GET);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/predict/getFile",
+      "Setup": null
+    },
+    {
+      "Order": 12,
+      "Title": "Get Prediction File by ID",
+      "Slug": "ocr-predict-id",
+      "Description": "Retrieve the prediction results of a particular file by its ID.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/Inferences/Model/{{model_id}}/ImageLevelInferences/{{id}}\u0022);\nvar request = new RestRequest(Method.GET);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic \u0022 \u002B Convert.ToBase64String(Encoding.Default.GetBytes(\u0022[[.ApiKey]]:\u0022)));\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/predict/id",
+      "Setup": null
+    },
+    {
+      "Order": 13,
+      "Title": "Prediction for Image URLs",
+      "Slug": "ocr-predict-url",
+      "Description": "Given image URL(s), extract data as per the label(s) specified in the model.\nMultiple image URLs per request are allowed.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/OCR/Model/{{model_id}}/LabelUrls/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic [[.ApiKey]]\u0022);\nrequest.AddHeader(\u0022accept\u0022, \u0022application/x-www-form-urlencoded\u0022);\nrequest.AddParameter(\u0022urls\u0022, \u0022https://nanonets.s3-us-west-2.amazonaws.com/test-images/test1.jpg\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/predict/url",
+      "Setup": null
+    },
+    {
+      "Order": 14,
+      "Title": "Async Prediction for Image URLs",
+      "Slug": "ocr-predict-url-async",
+      "Description": "Given image URL(s), extract data as per the label(s) specified in the model, \u003Cu\u003Easynchronously\u003C/u\u003E.\nThis end point will send back a response as soon as the file has been uploaded, with a file ID. To retrieve the extracted data from the uploaded file, please use this file ID and hit the [Get Prediction File by ID](#operation/ocr/predict/id) end point.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/OCR/Model/{{model_id}}/LabelUrls/?async=true\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic [[.ApiKey]]\u0022);\nrequest.AddHeader(\u0022accept\u0022, \u0022application/x-www-form-urlencoded\u0022);\nrequest.AddParameter(\u0022urls\u0022, \u0022https://nanonets.s3-us-west-2.amazonaws.com/test-images/test1.jpg\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/predict/url/async",
+      "Setup": null
+    },
+    {
+      "Order": 15,
+      "Title": "Train Model",
+      "Slug": "ocr-train",
+      "Description": "Train a model after uploading files to the model.\nThe same end point is to be used to re-train a model after uploading more files to improve the model.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/OCR/Model/{{model_id}}/Train/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic [[.ApiKey]]\u0022);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/train",
+      "Setup": null
+    },
+    {
+      "Order": 16,
+      "Title": "Upload Training Images by File",
+      "Slug": "ocr-upload-file",
+      "Description": "Upload a training image to the specified model using a locally stored file.\nOn successful upload, model information along with the total number of images per category will be received.\n\u003Cbr /\u003E\n\u003Cbr /\u003E\n**NOTE**: Batch file uploads are not supported by this end point.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/OCR/UploadFile/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022Authorization\u0022, \u0022Basic [[.ApiKey]]\u0022);\nrequest.AddHeader(\u0022Accept\u0022, \u0022multipart/form-data\u0022);\nrequest.AddParameter(\u0022data\u0022, \u0022[{\\\u0022filename\\\u0022:\\\u0022REPLACE_IMAGE_FILENAME.jpg\\\u0022, \\\u0022object\\\u0022: [{\\\u0022name\\\u0022:\\\u0022category1\\\u0022, \\\u0022ocr_text\\\u0022:\\\u0022text inside the bounding box\\\u0022, \\\u0022bndbox\\\u0022: {\\\u0022xmin\\\u0022: 1,\\\u0022ymin\\\u0022: 1,\\\u0022xmax\\\u0022: 100, \\\u0022ymax\\\u0022: 100}}]}]\u0022);\nrequest.AddFile(\u0022file\u0022, \u0022REPLACE_IMAGE_PATH.jpg\u0022);\nIRestResponse response = client.Execute(request);\u0022\n",
+      "Format": "sdk",
+      "OperationId": "ocr/upload/file",
+      "Setup": null
+    },
+    {
+      "Order": 17,
+      "Title": "Upload Training Images by URLs",
+      "Slug": "ocr-upload-url",
+      "Description": "Upload training images to a model using image URLs.\nMultiple images can be uploaded in the same request by adding more URLs in the \u0060urls\u0060 array.\nOn successful upload, model information along with the total number of images per category will be received.",
+      "Language": "csharp",
+      "Code": "var client = new RestClient(\u0022https://app.nanonets.com/api/v2/OCR/Model/REPLACE_MODEL_ID/UploadUrls/\u0022);\nvar request = new RestRequest(Method.POST);\nrequest.AddHeader(\u0022authorization\u0022, \u0022Basic [[.ApiKey]]\u0022);\nrequest.AddHeader(\u0022Content-Type\u0022, \u0022\u0022application/json\u0022\u0022);\nrequest.AddParameter(\u0022undefined\u0022, \u0022 {\u0022data\u0022: [{\u0022filename\u0022:\u0022https://nanonets.s3-us-west-2.amazonaws.com/test-images/test1.jpg\u0022, \u0022object\u0022: [{\u0022name\u0022:\u0022category1\u0022, \u0022ocr_text\u0022: \u0022text inside the bounding box\u0022, \u0022bndbox\u0022: {\u0022xmin\u0022: 1,\u0022ymin\u0022: 1,\u0022xmax\u0022: 100, \u0022ymax\u0022: 100}}, {\u0022name\u0022:\u0022category2\u0022, \u0022ocr_text\u0022: \u0022text inside the bounding box\u0022, \u0022bndbox\u0022: {\u0022xmin\u0022: 1,\u0022ymin\u0022: 1,\u0022xmax\u0022: 100, \u0022ymax\u0022: 100}}]}], \u0022urls\u0022: [\u0022https://nanonets.s3-us-west-2.amazonaws.com/test-images/test1.jpg\u0022]}\u0022, ParameterType.RequestBody);\nIRestResponse response = client.Execute(request);\n",
+      "Format": "sdk",
+      "OperationId": "ocr/upload/url",
+      "Setup": null
+    }
+  ]
+}

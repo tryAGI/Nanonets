@@ -4,9 +4,7 @@
 namespace Nanonets
 {
     /// <summary>
-    /// OCR Predict. Upload a file to an existing Optical Character Recognition (OCR) model and get the extracted data.<br/>
-    /// &lt;br /&gt;<br/>
-    /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).<br/>
+    /// OCR Predict<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>

@@ -4,9 +4,7 @@
 namespace Nanonets
 {
     /// <summary>
-    /// IC Predict. Upload a file to an existing Image Classification (IC) model and get the predicted classification result.<br/>
-    /// &lt;br /&gt;<br/>
-    /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).<br/>
+    /// IC Predict<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
@@ -35,11 +33,11 @@ namespace Nanonets
         /// ensuring <see cref="ApiException.ResponseBody"/> is populated.
         /// </summary>
         public bool ReadResponseAsString { get; set; }
-
         /// <summary>
         /// Client-wide request defaults such as headers, query parameters, retries, and timeout.
         /// </summary>
         public global::Nanonets.AutoSDKClientOptions Options { get; }
+
 
         /// <summary>
         /// 
