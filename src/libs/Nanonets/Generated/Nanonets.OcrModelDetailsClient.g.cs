@@ -4,9 +4,7 @@
 namespace Nanonets
 {
     /// <summary>
-    /// OCR Model Details. Get the details of an existing Optical Character Recognition (OCR) model.<br/>
-    /// &lt;br /&gt;<br/>
-    /// ([Create a model](https://app.nanonets.com) on the NanoNets web app.).<br/>
+    /// OCR Model Details<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
