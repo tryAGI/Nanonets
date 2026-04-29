@@ -156,8 +156,8 @@ namespace Nanonets
                 PrepareOcrPredictUrlAsyncRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    modelId: modelId,
-                    async: async,
+                    modelId: modelId!,
+                    async: async!,
                     request: request);
 
                 return __httpRequest;
