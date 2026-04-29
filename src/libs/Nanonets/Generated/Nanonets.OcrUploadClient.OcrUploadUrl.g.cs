@@ -157,8 +157,8 @@ namespace Nanonets
                 PrepareOcrUploadUrlRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    contentType: contentType,
-                    modelId: modelId,
+                    contentType: contentType!,
+                    modelId: modelId!,
                     request: request);
 
                 return __httpRequest;

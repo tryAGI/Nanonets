@@ -145,9 +145,9 @@ namespace Nanonets
                 PrepareOcrPredictGetFileRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    modelId: modelId,
-                    startDayInterval: startDayInterval,
-                    currentBatchDay: currentBatchDay);
+                    modelId: modelId!,
+                    startDayInterval: startDayInterval!,
+                    currentBatchDay: currentBatchDay!);
 
                 return __httpRequest;
             }

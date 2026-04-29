@@ -136,8 +136,8 @@ namespace Nanonets
                 PrepareOcrPredictIdRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    modelId: modelId,
-                    id: id);
+                    modelId: modelId!,
+                    id: id!);
 
                 return __httpRequest;
             }
