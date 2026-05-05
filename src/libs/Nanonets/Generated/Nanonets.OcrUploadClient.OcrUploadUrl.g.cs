@@ -73,6 +73,45 @@ namespace Nanonets
             global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+            var __response = await OcrUploadUrlAsResponseAsync(
+                contentType: contentType,
+                modelId: modelId,
+
+                request: request,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+
+            return __response.Body;
+        }
+        /// <summary>
+        /// Upload Training Images by URLs<br/>
+        /// Upload training images to a model using image URLs.<br/>
+        /// Multiple images can be uploaded in the same request by adding more URLs in the `urls` array.<br/>
+        /// On successful upload, model information along with the total number of images per category will be received.
+        /// </summary>
+        /// <param name="contentType"></param>
+        /// <param name="modelId"></param>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Nanonets.ApiException"></exception>
+        /// <remarks>
+        /// var client = new RestClient("https://app.nanonets.com/api/v2/OCR/Model/REPLACE_MODEL_ID/UploadUrls/");<br/>
+        /// var request = new RestRequest(Method.POST);<br/>
+        /// request.AddHeader("authorization", "Basic [[.ApiKey]]");<br/>
+        /// request.AddHeader("Content-Type", ""application/json"");<br/>
+        /// request.AddParameter("undefined", " {"data": [{"filename":"https://nanonets.s3-us-west-2.amazonaws.com/test-images/test1.jpg", "object": [{"name":"category1", "ocr_text": "text inside the bounding box", "bndbox": {"xmin": 1,"ymin": 1,"xmax": 100, "ymax": 100}}, {"name":"category2", "ocr_text": "text inside the bounding box", "bndbox": {"xmin": 1,"ymin": 1,"xmax": 100, "ymax": 100}}]}], "urls": ["https://nanonets.s3-us-west-2.amazonaws.com/test-images/test1.jpg"]}", ParameterType.RequestBody);<br/>
+        /// IRestResponse response = client.Execute(request);
+        /// </remarks>
+        public async global::System.Threading.Tasks.Task<global::Nanonets.AutoSDKHttpResponse<string>> OcrUploadUrlAsResponseAsync(
+            string contentType,
+            string modelId,
+
+            global::Nanonets.OcrUploadUrlRequest request,
+            global::Nanonets.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
             request = request ?? throw new global::System.ArgumentNullException(nameof(request));
 
             PrepareArguments(
@@ -105,6 +144,7 @@ namespace Nanonets
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::Nanonets.PathBuilder(
                                 path: $"/OCR/Model/{modelId}/UploadUrls",
                                 baseUri: HttpClient.BaseAddress);
@@ -189,6 +229,8 @@ namespace Nanonets
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -199,6 +241,11 @@ namespace Nanonets
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::Nanonets.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::Nanonets.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
@@ -216,6 +263,8 @@ namespace Nanonets
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -225,8 +274,7 @@ namespace Nanonets
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Nanonets.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -235,6 +283,11 @@ namespace Nanonets
                         __attempt < __maxAttempts &&
                         global::Nanonets.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::Nanonets.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::Nanonets.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Nanonets.AutoSDKRequestOptionsSupport.CreateHookContext(
@@ -251,14 +304,15 @@ namespace Nanonets
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Nanonets.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -298,6 +352,8 @@ namespace Nanonets
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -318,6 +374,8 @@ namespace Nanonets
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // 
@@ -474,7 +532,11 @@ namespace Nanonets
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return __content;
+                                    return new global::Nanonets.AutoSDKHttpResponse<string>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Nanonets.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __content);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -502,7 +564,11 @@ namespace Nanonets
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    return __content;
+                                    return new global::Nanonets.AutoSDKHttpResponse<string>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Nanonets.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __content);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
