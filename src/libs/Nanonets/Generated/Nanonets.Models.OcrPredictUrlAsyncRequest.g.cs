@@ -46,5 +46,6 @@ namespace Nanonets
         public OcrPredictUrlAsyncRequest()
         {
         }
+
     }
 }
