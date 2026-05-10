@@ -62,5 +62,6 @@ namespace Nanonets
         public OcrPredictFileAsyncRequest()
         {
         }
+
     }
 }

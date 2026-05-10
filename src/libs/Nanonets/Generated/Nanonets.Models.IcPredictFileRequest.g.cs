@@ -80,5 +80,6 @@ namespace Nanonets
         public IcPredictFileRequest()
         {
         }
+
     }
 }
