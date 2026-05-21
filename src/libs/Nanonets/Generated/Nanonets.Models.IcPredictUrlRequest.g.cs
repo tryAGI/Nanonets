@@ -64,5 +64,6 @@ namespace Nanonets
         public IcPredictUrlRequest()
         {
         }
+
     }
 }

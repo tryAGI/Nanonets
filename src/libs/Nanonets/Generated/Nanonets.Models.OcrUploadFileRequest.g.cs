@@ -82,5 +82,6 @@ namespace Nanonets
         public OcrUploadFileRequest()
         {
         }
+
     }
 }
