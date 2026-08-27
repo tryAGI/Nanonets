@@ -4,7 +4,7 @@
 namespace Nanonets
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class OcrPredictFileAsyncRequest
     {
