@@ -163,7 +163,7 @@ namespace Nanonets
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                             var __formValues = new global::System.Collections.Generic.List<global::System.Collections.Generic.KeyValuePair<string, string>>();
                             __formValues.Add(new global::System.Collections.Generic.KeyValuePair<string, string>(
@@ -368,7 +368,7 @@ namespace Nanonets
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // 
+                            //
                             if ((int)__response.StatusCode == 400)
                             {
                                 string? __content_400 = null;
@@ -400,7 +400,7 @@ namespace Nanonets
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // 
+                            //
                             if ((int)__response.StatusCode == 401)
                             {
                                 string? __content_401 = null;
@@ -432,7 +432,7 @@ namespace Nanonets
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // 
+                            //
                             if ((int)__response.StatusCode == 402)
                             {
                                 string? __content_402 = null;
@@ -464,7 +464,7 @@ namespace Nanonets
                                         h => h.Key,
                                         h => h.Value));
                             }
-                            // 
+                            //
                             if ((int)__response.StatusCode == 404)
                             {
                                 string? __content_404 = null;
