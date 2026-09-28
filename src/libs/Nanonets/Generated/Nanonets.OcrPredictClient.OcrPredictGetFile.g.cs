@@ -136,8 +136,8 @@ namespace Nanonets
                                 path: $"/Inferences/Model/{modelId}/ImageLevelInferences",
                                 baseUri: HttpClient.BaseAddress);
                             __pathBuilder
-                                .AddRequiredParameter("start_day_interval", startDayInterval.ToString()!)
-                                .AddRequiredParameter("current_batch_day", currentBatchDay.ToString()!)
+                                .AddRequiredParameter("start_day_interval", startDayInterval.ToString() ?? throw new global::System.InvalidOperationException("A required query parameter returned null from ToString()."))
+                                .AddRequiredParameter("current_batch_day", currentBatchDay.ToString() ?? throw new global::System.InvalidOperationException("A required query parameter returned null from ToString()."))
                                 ;
                             var __path = __pathBuilder.ToString();
                 __path = global::Nanonets.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -179,9 +179,9 @@ namespace Nanonets
                 PrepareOcrPredictGetFileRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    modelId: modelId!,
-                    startDayInterval: startDayInterval!,
-                    currentBatchDay: currentBatchDay!);
+                    modelId: modelId,
+                    startDayInterval: startDayInterval,
+                    currentBatchDay: currentBatchDay);
 
                 return __httpRequest;
             }
@@ -203,7 +203,7 @@ namespace Nanonets
                                 pathTemplate: "$\"/Inferences/Model/{modelId}/ImageLevelInferences\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: null,
                                 clientOptions: Options,
@@ -237,7 +237,7 @@ namespace Nanonets
                                 pathTemplate: "$\"/Inferences/Model/{modelId}/ImageLevelInferences\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: __exception,
                                 clientOptions: Options,
@@ -278,7 +278,7 @@ namespace Nanonets
                                 pathTemplate: "$\"/Inferences/Model/{modelId}/ImageLevelInferences\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -326,7 +326,7 @@ namespace Nanonets
                                 pathTemplate: "$\"/Inferences/Model/{modelId}/ImageLevelInferences\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -348,7 +348,7 @@ namespace Nanonets
                                 pathTemplate: "$\"/Inferences/Model/{modelId}/ImageLevelInferences\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
